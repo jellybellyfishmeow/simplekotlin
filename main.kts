@@ -10,6 +10,7 @@ fun whenFn(word: Any) : String {
         1 -> "one";
         in 2..10 -> "low number";
         is Int -> "a number";
+        is String -> "Say what?"
         else -> "I don't understand";
     }
 }
@@ -86,7 +87,7 @@ class Money (amount: Int, currency: String) {
         if (this.currency == m.currency) {
             return Money(this.amount + m.amount, this.currency);
         } else {
-            return Money((this.convert(m.currency).amount + m.amount), m.currency);
+            return Money((m.convert(this.currency).amount + this.amount), this.currency);
         }
     }
 }
