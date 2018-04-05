@@ -3,14 +3,109 @@
 println("UW Homework: Simple Kotlin")
 
 // write a "whenFn" that takes an arg of type "Any" and returns a String
+fun whenFn(word: Any) : String {
+    return when(word) {
+        "Hello" -> "world";
+        0 -> "zero";
+        1 -> "one";
+        in 2..10 -> "low number";
+        is Int -> "a number";
+        else -> "I don't understand";
+    }
+}
 
 // write an "add" function that takes two Ints, returns an Int, and adds the values
+fun add(i1: Int, i2: Int): Int {
+    return i1 + i2;
+}
+
 // write a "sub" function that takes two Ints, returns an Int, and subtracts the values
+fun sub(i1: Int, i2: Int): Int {
+    return i1 - i2;
+}
+
 // write a "mathOp" function that takes two Ints and a function (that takes two Ints and returns an Int), returns an Int, and applies the passed-in-function to the arguments
+fun mathOp(i1: Int, i2: Int, op: (i1: Int, i2: Int) -> Int): Int{
+    return op(i1, i2);
+}
 
 // write a class "Person" with first name, last name and age
+class Person (firstName: String, lastName: String, age: Int) {
+    var firstName: String;
+    var lastName: String;
+    var age: Int;
+
+    val debugString: String
+        get() {
+          return "[Person firstName:$firstName lastName:$lastName age:$age]";
+        }
+
+    init{
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+    }
+
+    fun equals(p: Person): Boolean{
+        return p.firstName == this.firstName && p.lastName == this.lastName && p.age == this.age;
+    }
+
+    override fun hashCode(): Int{
+        var result = 17;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + age;
+        return result;
+    }
+}
 
 // write a class "Money"
+
+class Money (amount: Int, currency: String) {
+    var amount: Int;
+    var currency: String;
+
+    init{
+        this.amount = amount;
+        this.currency = currency;
+    }
+    fun convert(convertTo: String): Money {
+        var money = this.amount.toDouble();
+        when(this.currency) {
+            "GBP" -> money *= 2;
+            "EUR" -> money /= 1.5;
+            "CAN" -> money /= 1.25;
+        }
+        when(convertTo) {
+            "GBP" -> money /= 2;
+            "CAN" -> money *= 1.25;
+            "EUR" -> money *= 1.5;
+        }
+        return Money(money.toInt(), convertTo);
+    }
+    operator fun plus(m: Money): Money {
+        if (this.currency == m.currency) {
+            return Money(this.amount + m.amount, this.currency);
+        } else {
+            return Money((this.convert(m.currency).amount + m.amount), m.currency);
+        }
+    }
+}
+
+/*
+"amount" and "currency". "Currency" can be one of "USD", "EUR", "CAN" and "GBP".
+"Amount" is a standard Int. Define the properties such that "amount" can never be less than zero
+, and that "currency" can only be one of those four symbols. Define a public method,
+convert, that takes a String argument for the currency type to convert to, and return a new
+Money instance with the amount converted. Conversion rates should be as follows:
+10 USD converts to 5 GBP; 10 USD converts to 15 EUR; 12 USD converts to 15 CAN.
+(Make sure you can convert in both directions!)
+ Define the "+" operator on Money to return a new instance of Money that adds the amount,
+ converting the currency to the first (left-hand) Money's currency.
+ So adding (10 USD) + (5 GBP) should return a result in USD. Similarly, adding (5 GBP) + (10 USD) should return the result in GBP.
+ */
+
+
 
 // ============ DO NOT EDIT BELOW THIS LINE =============
 
