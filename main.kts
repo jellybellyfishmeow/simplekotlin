@@ -60,7 +60,6 @@ class Person (firstName: String, lastName: String, age: Int) {
 }
 
 // write a class "Money"
-
 class Money (amount: Int, currency: String) {
     var amount: Int;
     var currency: String;
@@ -91,21 +90,6 @@ class Money (amount: Int, currency: String) {
         }
     }
 }
-
-/*
-"amount" and "currency". "Currency" can be one of "USD", "EUR", "CAN" and "GBP".
-"Amount" is a standard Int. Define the properties such that "amount" can never be less than zero
-, and that "currency" can only be one of those four symbols. Define a public method,
-convert, that takes a String argument for the currency type to convert to, and return a new
-Money instance with the amount converted. Conversion rates should be as follows:
-10 USD converts to 5 GBP; 10 USD converts to 15 EUR; 12 USD converts to 15 CAN.
-(Make sure you can convert in both directions!)
- Define the "+" operator on Money to return a new instance of Money that adds the amount,
- converting the currency to the first (left-hand) Money's currency.
- So adding (10 USD) + (5 GBP) should return a result in USD. Similarly, adding (5 GBP) + (10 USD) should return the result in GBP.
- */
-
-
 
 // ============ DO NOT EDIT BELOW THIS LINE =============
 
